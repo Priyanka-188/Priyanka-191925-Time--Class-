@@ -1,0 +1,65 @@
+#include<iostream>
+using namespace std;
+class Time2;
+class Time1{
+	private:
+		int hour ;
+		int minutes ;
+	public:
+		void get_time(int h,int m)
+		{
+			hour = h;
+			minutes = m;
+		}
+		friend void add(Time1,Time2);
+};
+class Time2{
+	private:
+		int hh1;
+		int mm1;
+	public:
+		void get_time(int h,int m)
+		{
+			hh1 = h;
+			mm1 = m;
+		}
+		friend void add(Time1,Time2);
+};
+void add(Time1 time,Time2 time1){
+	int k1,k2;
+	if(time.minutes+time1.mm1<=60)
+	{
+		k1 = time.hour+time1.hh1;
+		k2 = time.minutes+time1.mm1;
+	}
+	else{
+		k1 = time.hour+time1.hh1+(time.minutes+time1.mm1)/60;
+		k2 = (time.minutes+time1.mm1)%60;
+	}
+	cout<<"Sum of first and second time = "<<k1<<":"<<k2<<endl;
+}
+
+int main(){
+	Time1 time;
+	Time2 time1;
+	int ht1,mt1;
+	cout<<"Enter hour of first time "<<endl;
+    cin>>ht1;
+    cout<<"Enter minutes of first time "<<endl;
+    cin>>mt1;
+    time.get_time(ht1,mt1);
+    cout<<endl;
+    int ht2,mt2;
+    cout<<"Enter hour of second time "<<endl;
+    cin>>ht2;
+    cout<<"Enter minutes of second time "<<endl;
+    cin>>mt2;
+    time1.get_time(ht2,mt2);
+    cout<<endl<<endl;
+    cout<<"-------------******--------------"<<endl;
+    cout<<"first time = "<<ht1<<":"<<mt1<<endl;
+    cout<<"second time = "<<ht2<<":"<<mt2<<endl<<endl;
+    add(time,time1);
+
+    return 0;
+}
